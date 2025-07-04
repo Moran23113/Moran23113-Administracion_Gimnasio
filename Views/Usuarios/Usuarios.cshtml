@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+@model  List<Proyecto_1_Basico_1.Models.Usuarios>
+<h1 id="Usuarios">Lista de Usuarios Registrados</h1>
+<table class="table table-bordered text-center">
+    <thead class="table table-dark">
+        <tr>
+            <th class="col-3">Identificador de Usuario</th>
+            <th class="col-2">Nombre de Usuario</th>
+            <th class="col-2">Fecha de Ingreso</th>
+            <th class="col-1"> Email</th>
+            <th class="col-4">Telefono</th>
+            <th>Acciones</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr class="table table-secondary">
+                <td>@user.ID_USUARIO</td>
+                <td>@user.NOMBRE_COMPLETO</td>
+                <td>@user.FECHA_DE_INGRESO</td>
+                <td>@user.EMAIL</td>
+                <td>@user.TELEFONO</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Acciones
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-pencil-square text-primary"></i> Editar
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-trash3 text-danger"></i> Eliminar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+             \
+
+
+
+
+            </tr>
+
+
+
+        }
+    </tbody>
+
+
+</table>
+
