@@ -1,27 +1,33 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Usuarios";
 }
 
-@model  List<Proyecto_1_Basico_1.Models.Usuarios>
-<h1 id="Usuarios">Lista de Usuarios Registrados</h1>
+@model List<Proyecto_1_Basico_1.Models.Usuarios>
+
+<h1 class="text-center mb-4">Lista de Usuarios Registrados</h1>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-info text-center">@TempData["mensaje"]</div>
+}
+<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Agregar">
+    <i class="bi bi-person-plus-fill text-success"></i> Agregar nuevo
+</button>
 <table class="table table-bordered text-center">
-    <thead class="table table-dark">
+    <thead class="table-dark">
         <tr>
-            <th class="col-3">Identificador de Usuario</th>
-            <th class="col-2">Nombre de Usuario</th>
-            <th class="col-2">Fecha de Ingreso</th>
-            <th class="col-1"> Email</th>
-            <th class="col-4">Telefono</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha de Ingreso</th>
+            <th>Email</th>
+            <th>Teléfono</th>
             <th>Acciones</th>
-
-
         </tr>
     </thead>
     <tbody>
-        @foreach(var user in Model)
+        @foreach (var user in Model)
         {
-            <tr class="table table-secondary">
+            <tr class="table-secondary">
                 <td>@user.ID_USUARIO</td>
                 <td>@user.NOMBRE_COMPLETO</td>
                 <td>@user.FECHA_DE_INGRESO</td>
@@ -29,36 +35,89 @@
                 <td>@user.TELEFONO</td>
                 <td>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             Acciones
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <button class="dropdown-item btn-editar" data-bs-toggle="modal" data-bs-target="#Editar" data-id="@user.ID_USUARIO">
                                     <i class="bi bi-pencil-square text-primary"></i> Editar
-                                </a>
+                                </button>
                             </li>
+
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="bi bi-trash3 text-danger"></i> Eliminar
-                                </a>
+                                <form asp-action="Eliminar" asp-controller="Usuarios" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@user.ID_USUARIO" />
+                                    <button type="submit" class="dropdown-item text-danger border-0 bg-transparent">
+                                        <i class="bi bi-trash3"></i> Eliminar
+                                    </button>
+                                </form>
+
                             </li>
                         </ul>
                     </div>
                 </td>
-
-             \
-
-
-
-
             </tr>
-
-
-
         }
     </tbody>
-
-
 </table>
 
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="Editar" tabindex="-1" aria-labelledby="EditarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-action="Editar" asp-controller="Usuarios" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditarLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="idUsuarioEditar" name="ID_USUARIO" />
+
+                <label for="NombreEditar">Nombre Completo</label>
+                <input type="text" id="Nombre" name="NOMBRE_COMPLETO" class="form-control" required />
+
+                <label for="FechaEditar">Fecha de Ingreso</label>
+                <input type="text" id="fechaingreso" name="FECHA_DE_INGRESO" class="form-control" required />
+
+                <label for="EmailEditar">Email</label>
+                <input type="email" id="email" name="EMAIL" class="form-control" required />
+
+                <label for="TelefonoEditar">Teléfono</label>
+                <input type="text" id="telefono" name="TELEFONO" class="form-control" required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div class="modal fade" id="Agregar" tabindex="-1" aria-labelledby="AgregarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form asp-action="Agregar" asp-controller="Usuarios" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AgregarLabel">Agregar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <label for="NombreAgregar">Nombre Completo</label>
+                <input type="text" id="NombreAgregar" name="NOMBRE_COMPLETO" class="form-control" required />
+
+                <label for="FechaAgregar">Fecha de Ingreso</label>
+                <input type="text" id="FechaAgregar" name="FECHA_DE_INGRESO" class="form-control" required />
+
+                <label for="EmailAgregar">Email</label>
+                <input type="email" id="EmailAgregar" name="EMAIL" class="form-control" required />
+
+                <label for="TelefonoAgregar">Teléfono</label>
+                <input type="text" id="TelefonoAgregar" name="TELEFONO" class="form-control" required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+            </div>
+        </form>
+    </div>
+</div>

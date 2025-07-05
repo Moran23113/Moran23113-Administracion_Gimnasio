@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function inicializarEventosEdicion() {
+    document.querySelectorAll('.btn-editar').forEach(function (boton) {
+        boton.addEventListener('click', function () {
+            const fila = this.closest('tr');
+            const celdas = fila.querySelectorAll('td');
 
-// Write your JavaScript code.
+            const id = this.dataset.id;
+
+            const nombre = celdas[1].innerText.trim();
+            const fecha = celdas[2].innerText.trim();
+            const email = celdas[3].innerText.trim();
+            const telefono = celdas[4].innerText.trim();
+
+            document.getElementById('idUsuarioEditar').value = id;
+            document.getElementById('Nombre').value = nombre;
+            document.getElementById('fechaingreso').value = fecha;
+            document.getElementById('email').value = email;
+            document.getElementById('telefono').value = telefono;
+
+            console.log("🛠️ Datos cargados en el modal:", { id, nombre, fecha, email, telefono });
+        });
+    });
+}
