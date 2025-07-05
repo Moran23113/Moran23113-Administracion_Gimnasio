@@ -24,3 +24,16 @@ body {
 #Usuarios{
     font-size:24px;
 }
+
+#BodyUsuarios {
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center;
+    background-size: 1000px;
+}
+
+#layout {
+    background-image: url('O9FG5M0.jpg');
+    background-size: cover;
+    background-position: center;
+}

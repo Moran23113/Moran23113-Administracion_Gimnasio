@@ -5,19 +5,19 @@
 @model List<Proyecto_1_Basico_1.Models.Usuarios>
 
 <h1 class="text-center mb-4">Lista de Usuarios Registrados</h1>
-
+<body id="BodyUsuarios">
 @if (TempData["mensaje"] != null)
 {
     <div class="alert alert-info text-center">@TempData["mensaje"]</div>
 }
-<button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Agregar">
-    <i class="bi bi-person-plus-fill text-success"></i> Agregar nuevo
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Agregar">
+    <i class="bi bi-person-plus-fill text-info"></i> Agregar Usuario
 </button>
 <table class="table table-bordered text-center">
-    <thead class="table-dark">
+    <thead class="table-primary">
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
+            <th>Identificador del Usuario</th>
+            <th>Nombre Completo</th>
             <th>Fecha de Ingreso</th>
             <th>Email</th>
             <th>Teléfono</th>
@@ -27,7 +27,7 @@
     <tbody>
         @foreach (var user in Model)
         {
-            <tr class="table-secondary">
+            <tr class="table-info">
                 <td>@user.ID_USUARIO</td>
                 <td>@user.NOMBRE_COMPLETO</td>
                 <td>@user.FECHA_DE_INGRESO</td>
@@ -35,7 +35,7 @@
                 <td>@user.TELEFONO</td>
                 <td>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             Acciones
                         </button>
                         <ul class="dropdown-menu">
@@ -61,6 +61,7 @@
         }
     </tbody>
 </table>
+</body>
 
 <!-- MODAL EDITAR -->
 <div class="modal fade" id="Editar" tabindex="-1" aria-labelledby="EditarLabel" aria-hidden="true">
